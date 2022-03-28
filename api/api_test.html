@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <title>API Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+    <meta charset="utf-8"/>
+    <script>
+        function getHolidays(){
+            request = new XMLHttpRequest();
+            console.log("1 - request object created");
+
+            request.open("GET", "https://calendarific.com/api/v2/holidays?api_key=2457bb3b7d0ab5c762be6d4661d94cd9f108c588&country=IT&year=2020&type=national", true)
+
+                console.log("2 - opened request file");
+
+                request.onreadystatechange = function() {
+    				console.log("3 - readystatechange event fired.");
+
+    				if (request.readyState == 4 && request.status == 200) {
+
+    					// Step 5: wait for done + success
+    					console.log("5 - response received");
+    					result = request.responseText;
+                        list = JSON.parse(result);
+
+
+                        for(i = 0; i < list.response.holidays.length; i++){
+                            console.log(list.response.holidays[i].name);
+
+                            var tblRow = "<tr>" + "<td>" + list.response.holidays[i].name + "</td>" +
+                                        "<td>" + list.response.holidays[i].date.iso + "</td>" + "<td>" + list.response.holidays[i].description + "</td>";
+                          $(tblRow).appendTo("#holidays tbody");
+
+                          document.getElementById("data").innerHTML = "";
+                        }
+                    }
+                    else if (request.readyState == 4 && request.status != 200) {
+
+        				document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+
+    				}
+
+    				else if (request.readyState == 3) {
+
+        				document.getElementById("data").innerHTML = "Too soon!  Try again";
+
+    				}
+                }
+                request.send();
+
+    			console.log("4 - Request sent");
+            }
+
+    </script>
+</head>
+
+<body onload= "getHolidays()">
+
+	<h1>National Holidays in Italy</h1>
+	<div id="data">Loading...</div>
+
+    <table id= "holidays" border= 2>
+        <thead>
+            <th> Holiday Name</th>
+            <th> Date in 2020</th>
+            <th> Description</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <p> This web page displays information from the Calerderific API, which consists of
+    data on holidays from all over the world</p>
+    <p> This API is from <a href="https://calendarific.com/">https://calendarific.com/ </a> </p>
+    <p> I used options on this API to only retrieve national holidays in Italy. The API also had options
+        to select holidays by day and month, in addition to location(country/state) and type(national,
+        local, religious etc...)
+    </p>
+    <p> This API could be useful on a business or school website to determine days off, or could be
+        used for marketing and offering special deals as a business.
+    </p>
+
+</body>
+
+</html>
