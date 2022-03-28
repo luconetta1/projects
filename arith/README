@@ -40,8 +40,8 @@ Architecture:
     - Upon reading the ppm, the pixels are stored within a 2D array from 
       A2methods. 
     - Each of the functions in trans.c creates a 2D array using A2 methods, and
-      mapping (row-major )is used to loop through the 2D array as we 
-      convert the data which we then store inside another 2D array. 
+      mapping (row-major )is used to loop through the 2D array as the program 
+      converts the data which is then stored inside another 2D array. 
     - The final 2D array of codewords is output to standard output in a 
       row-major format of big endian notation. 
     - The following is a list of the files provided: 
