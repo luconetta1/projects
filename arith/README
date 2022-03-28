@@ -1,0 +1,61 @@
+Name:                Luca Conetta
+Assignment:          arith
+Submit Date:         03/22/2021
+Approximate Time:    38 Hours
+-----------------------------------------------------------------------------
+
+To Run: run make all to compile the program, then execute with commands found
+in Makefile
+
+Acknowledgements:
+    - Received help from Gustavo on interpreting input and output values for 
+      codewords.
+    - Used stackoverflow and other online forums for assistance in formatting
+      code and using certain packages
+    - Read through the "man" pages for ppm datatype
+    - Referenced Hanson multiple times
+
+Succesfully Implemented:
+   To my knowledge, all apsects of this assignment have been 
+   implemented correctly.
+
+   1. Bitpack
+     - handles the packing and unpacking of 64bit words
+
+   2. Compress40
+     - compresses an image in ppm format into a binary
+       image of words
+
+   3. Decompress40
+     - converts a compressed binary image of words into a 
+      image of ppm form
+
+
+Architecture:
+    - The implementation was programmed in stages, First I would code
+      a compression phase, then code the corresponding decompression 
+      phase that undoes the respective compression. These transformation 
+      functions are declared in trans.h and the implementation is 
+      stored within trans.c. 
+    - Upon reading the ppm, the pixels are stored within a 2D array from 
+      A2methods. 
+    - Each of the functions in trans.c creates a 2D array using A2 methods, and
+      mapping (row-major )is used to loop through the 2D array as we 
+      convert the data which we then store inside another 2D array. 
+    - The final 2D array of codewords is output to standard output in a 
+      row-major format of big endian notation. 
+    - The following is a list of the files provided: 
+       1. bitpack.c   -> packing and unpacking 64 bit codewords
+       2. 40image.c   -> main from which compress/decompress are called from
+       3. compress40.c  -> defines methods for compress40 and decompress40
+       4. ppmdiff.c   -> computes the average difference between 2 image files
+       5. print.c     -> (and print.h) methods for printing codewords during
+                         compress
+                         and for reading a binary image of codewords during
+                         decompress.
+       6. trans.h     -> (and trans.h) helper methods and apply functions for 
+                        the conversions that occur during compress40 and 
+                        decompress40.
+       7. a2methods.h -> interface for the 2D arrays and mapping functions.
+                     (also includes a2blocked.c a2plain.c uarray2b.c uarray2.c)
+                     (and the relevant header files       uarray2b.h uarray2.h)
