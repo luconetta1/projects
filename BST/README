@@ -25,7 +25,7 @@ Acknowledgements:
 
 Files:
 
-hw4.cpp:
+bst.cpp:
         Main driver file.
 
 BinarySearchTree.cpp:
@@ -65,5 +65,4 @@ Testing:
         as well;
 
 
-Note: This homework comes partially implemented, but student must also
-create the driver and add class functionality.
+
